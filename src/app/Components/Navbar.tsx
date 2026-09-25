@@ -16,7 +16,7 @@ const Navbar = () => {
             <span className="text-sm font-bold text-white">FITLOG</span>
           </Link>
 
-          <div className="hidden items-center gap-2 sm:flex">
+          <div className="hidden items-center gap-3 sm:flex">
             <Link
               href="/"
               className={`rounded-full px-6 py-2 text-sm font-medium ${
@@ -41,19 +41,25 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-3 sm:gap-5">
-            <div className="flex items-center gap-2 text-sm text-[#9CA3AF]">
+            <Link
+              href="/my-plan"
+              className="flex items-center gap-2 text-sm text-[#9CA3AF] hover:text-white"
+            >
               <span>Plan</span>
               <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#C2F800] text-xs text-black">
                 0
               </span>
-            </div>
+            </Link>
 
-            <div className="flex items-center gap-2 text-sm text-[#9CA3AF]">
+            <Link
+              href="/my-plan"
+              className="flex items-center gap-2 text-sm text-[#9CA3AF] hover:text-white"
+            >
               <span>Saved</span>
               <span className="flex h-5 w-5 items-center justify-center rounded-full border border-zinc-700 text-xs text-[#9CA3AF]">
                 0
               </span>
-            </div>
+            </Link>
           </div>
         </div>
 
