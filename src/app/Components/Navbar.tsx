@@ -11,10 +11,10 @@ const Navbar = () => {
     <nav className="w-full border-b border-zinc-800 bg-[#0C0D10]">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4">
-          <Link href="/" className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <Image src="/logo.png" alt="Fitlog" width={30} height={30} />
             <span className="text-sm font-bold text-white">FITLOG</span>
-          </Link>
+          </div>
 
           <div className="hidden items-center gap-3 sm:flex">
             <Link
