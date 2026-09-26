@@ -1,4 +1,19 @@
+import { CardsContext } from "@/context/CardContext";
+import { useContext } from "react";
+
 export default function StatOne() {
+  const { addToPlan } = useContext(CardsContext);
+
+  const totalMinutes = addToPlan.reduce(
+    (acc, exercise) => acc + exercise.duration,
+    0,
+  );
+
+  const totalCalories = addToPlan.reduce(
+    (acc, exercise) => acc + exercise.caloriesBurned,
+    0,
+  );
+
   return (
     <div className="rounded-2xl bg-[#14151c] border border-white/5 p-6 md:p-8">
       <div className="grid grid-cols-1 divide-y divide-white/10 sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
@@ -6,8 +21,9 @@ export default function StatOne() {
           <p className="text-xs font-normal text-gray-400 mb-1 tracking-wide">
             Exercises
           </p>
+
           <p className="text-3xl md:text-4xl font-extrabold text-[#c8ff00]">
-            2
+            {addToPlan.length}
           </p>
         </div>
 
@@ -15,14 +31,20 @@ export default function StatOne() {
           <p className="text-xs font-normal text-gray-400 mb-1 tracking-wide">
             Minutes
           </p>
-          <p className="text-3xl md:text-4xl font-extrabold text-white">23</p>
+
+          <p className="text-3xl md:text-4xl font-extrabold text-white">
+            {totalMinutes}
+          </p>
         </div>
 
         <div className="pt-4 sm:pt-0 sm:pl-6">
           <p className="text-xs font-normal text-gray-400 mb-1 tracking-wide">
             Calories
           </p>
-          <p className="text-3xl md:text-4xl font-extrabold text-white">190</p>
+
+          <p className="text-3xl md:text-4xl font-extrabold text-white">
+            {totalCalories}
+          </p>
         </div>
       </div>
     </div>

@@ -57,7 +57,7 @@ export default function MyPlan() {
             <select className="select select-sm w-32 rounded-full border border-white/10 bg-[#1c1c22] text-white">
               <option>Duration</option>
               <option>Calories</option>
-              <option>Exercises</option>
+              <option>Rating</option>
             </select>
           </div>
         </div>
