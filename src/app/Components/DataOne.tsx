@@ -1,9 +1,11 @@
 import { CardsContext } from "@/context/CardContext";
 import { iLibraryType } from "@/type";
-import { Check, Clock, Flame, Star, X } from "lucide-react";
+import { Clock, Flame, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
+import DltBtn from "./DltBtn";
+import MarkBtn from "./MarkBtn";
 
 export default function DataOne() {
   const { addToPlan } = useContext(CardsContext);
@@ -74,13 +76,8 @@ export default function DataOne() {
             >
               View Details
             </Link>
-            <button className="flex items-center gap-1 bg-lime-400 text-black text-xs sm:text-sm font-medium rounded-full px-3 py-1.5 sm:px-4 sm:py-2">
-              <Check size={14} />
-              <span className="hidden sm:inline">Mark as Done</span>
-            </button>
-            <button className="text-gray-400 hover:text-white p-1">
-              <X size={16} />
-            </button>
+            <MarkBtn />
+            <DltBtn cardItem={cardItem} />
           </div>
         </div>
       ))}
