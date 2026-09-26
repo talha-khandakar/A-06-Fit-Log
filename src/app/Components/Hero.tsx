@@ -20,9 +20,12 @@ const Hero = () => {
             into today&apos;s plan, and watch the week&apos;s work add up.
           </p>
 
-          <button className="mt-6 rounded-md bg-lime-400 px-5 py-3 text-xs font-bold text-black">
+          <a
+            href="#library"
+            className="mt-6 inline-block rounded-md bg-lime-400 px-5 py-3 text-xs font-bold text-black"
+          >
             BROWSE WORKOUTS
-          </button>
+          </a>
         </div>
 
         <div className="mt-8 w-full md:mt-0 md:w-1/2">
