@@ -5,7 +5,7 @@ export default function Loading() {
         <span className="loading loading-spinner loading-lg text-white"></span>
 
         <h2 className="mt-5 text-lg font-semibold text-white">
-          Loading exercises...
+          Loading Data...
         </h2>
 
         <p className="mt-1 text-sm text-gray-500">
