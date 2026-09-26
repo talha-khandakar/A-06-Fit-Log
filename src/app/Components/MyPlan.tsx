@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import DataOne from "./DataOne";
+import DataTwo from "./DataTwo";
 import StatOne from "./StatOne";
 import StatTwo from "./StatTwo";
 
@@ -58,6 +60,10 @@ export default function MyPlan() {
               <option>Exercises</option>
             </select>
           </div>
+        </div>
+
+        <div className="mt-4">
+          {button === "Today's plan" ? <DataOne /> : <DataTwo />}
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+import PlanBtn from "@/app/Components/PlanBtn";
+import SaveBtn from "@/app/Components/SaveBtn";
 import { iLibraryType } from "@/type";
 import Image from "next/image";
 
@@ -99,12 +101,8 @@ export default async function LibraryDetailsPage({
             </ol>
 
             <div className="flex flex-wrap gap-3 mt-6">
-              <button className="bg-lime-400 text-black font-bold text-sm px-4 py-2 rounded-lg">
-                + Add to today&apos;s plan
-              </button>
-              <button className="border border-zinc-700 text-white text-sm px-4 py-2 rounded-lg">
-                🔖 Save for later
-              </button>
+              <PlanBtn library={library} />
+              <SaveBtn library={library} />
             </div>
           </div>
         </div>

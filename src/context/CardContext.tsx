@@ -1,19 +1,40 @@
+"use client";
+
+import { iLibraryType } from "@/type";
 import { createContext, ReactNode, useState } from "react";
 
-export const CardsContext = createContext({});
+interface CardsContextType {
+  addToPlan: iLibraryType[];
+  setAddToPlan: React.Dispatch<React.SetStateAction<iLibraryType[]>>;
+  addToSaved: iLibraryType[];
+  setAddToSaved: React.Dispatch<React.SetStateAction<iLibraryType[]>>;
+}
 
-export default function CardProvider({ children }: { children: ReactNode }) {
-  const [addToPlan, setAddToPlan] = useState([]);
-  const [addToSaved, setAddToSaved] = useState([]);
+interface CardProviderProps {
+  children: ReactNode;
+}
 
-  const sharedData = {
-    addToPlan,
-    setAddToPlan,
-    addToSaved,
-    setAddToSaved,
-  };
+export const CardsContext = createContext<CardsContextType>({
+  addToPlan: [],
+  setAddToPlan: () => {},
+  addToSaved: [],
+  setAddToSaved: () => {},
+});
+
+export default function CardProvider({ children }: CardProviderProps) {
+  const [addToPlan, setAddToPlan] = useState<iLibraryType[]>([]);
+  const [addToSaved, setAddToSaved] = useState<iLibraryType[]>([]);
 
   return (
-    <CardsContext.Provider value={sharedData}>{children}</CardsContext.Provider>
+    <CardsContext.Provider
+      value={{
+        addToPlan,
+        setAddToPlan,
+        addToSaved,
+        setAddToSaved,
+      }}
+    >
+      {children}
+    </CardsContext.Provider>
   );
 }

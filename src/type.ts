@@ -1,4 +1,5 @@
 export interface iLibraryType {
+  calories: number;
   title: string;
   id: number;
   name: string;

@@ -1,11 +1,14 @@
 "use client";
 
+import { CardsContext } from "@/context/CardContext";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useContext } from "react";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const { addToPlan, addToSaved } = useContext(CardsContext);
 
   return (
     <nav className="w-full border-b border-zinc-800 bg-[#0C0D10]">
@@ -47,7 +50,7 @@ const Navbar = () => {
             >
               <span>Plan</span>
               <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#C2F800] text-xs text-black">
-                0
+                {addToPlan.length}
               </span>
             </Link>
 
@@ -57,7 +60,7 @@ const Navbar = () => {
             >
               <span>Saved</span>
               <span className="flex h-5 w-5 items-center justify-center rounded-full border border-zinc-700 text-xs text-[#9CA3AF]">
-                0
+                {addToSaved.length}
               </span>
             </Link>
           </div>
