@@ -1,27 +1,31 @@
-import { CardsContext } from "@/context/CardContext";
+"use client";
+
 import { iLibraryType } from "@/type";
 import { Clock, Flame, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext } from "react";
 import DltBtn from "./DltBtn";
 import MarkBtn from "./MarkBtn";
 
-export default function DataOne() {
-  const { addToPlan } = useContext(CardsContext);
+interface DataOneProps {
+  data: iLibraryType[];
+}
 
-  if (addToPlan.length === 0) {
+export default function DataOne({ data }: DataOneProps) {
+  if (data.length === 0) {
     return (
-      <div className="w-full max-w-6xl mx-auto border border-dashed border-white/10 rounded-2xl py-20 px-4 flex flex-col items-center justify-center text-center">
-        <h3 className="text-white font-bold text-lg sm:text-xl uppercase tracking-wide">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-center rounded-2xl border border-dashed border-white/10 px-4 py-20 text-center">
+        <h3 className="text-lg font-bold uppercase tracking-wide text-white sm:text-xl">
           Nothing Here Yet
         </h3>
-        <p className="text-gray-400 text-sm mt-2 max-w-sm">
+
+        <p className="mt-2 max-w-sm text-sm text-gray-400">
           Browse the library and add a lift to get today moving.
         </p>
+
         <Link
           href="/"
-          className="mt-5 bg-lime-400 text-black text-sm font-semibold rounded-full px-5 py-2.5 hover:bg-lime-300 transition"
+          className="mt-5 rounded-full bg-lime-400 px-5 py-2.5 text-sm font-semibold text-black hover:bg-lime-300"
         >
           Go to workouts
         </Link>
@@ -30,14 +34,14 @@ export default function DataOne() {
   }
 
   return (
-    <div className="flex flex-col gap-3 w-full max-w-6xl mx-auto">
-      {addToPlan.map((cardItem: iLibraryType) => (
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-3">
+      {data.map((cardItem) => (
         <div
           key={cardItem.id}
-          className="flex items-center justify-between gap-3 bg-[#12141a] border border-white/5 rounded-xl p-3 sm:p-4 w-full"
+          className="flex w-full items-center justify-between gap-3 rounded-xl border border-white/5 bg-[#12141a] p-3 sm:p-4"
         >
-          <div className="flex items-center gap-3 min-w-0 flex-1">
-            <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden shrink-0">
+          <div className="flex min-w-0 flex-1 items-center gap-3">
+            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg sm:h-16 sm:w-16">
               <Image
                 src={cardItem.image}
                 alt={cardItem.name}
@@ -45,37 +49,43 @@ export default function DataOne() {
                 className="object-cover"
               />
             </div>
+
             <div className="min-w-0">
-              <h3 className="text-white font-semibold text-sm sm:text-base uppercase tracking-wide truncate">
+              <h3 className="truncate text-sm font-semibold uppercase tracking-wide text-white sm:text-base">
                 {cardItem.title}
               </h3>
-              <p className="text-gray-400 text-xs sm:text-sm truncate">
+
+              <p className="truncate text-xs text-gray-400 sm:text-sm">
                 {cardItem.equipment}
               </p>
-              <div className="flex items-center gap-3 mt-1 text-xs sm:text-sm text-gray-300">
+
+              <div className="mt-1 flex items-center gap-3 text-xs text-gray-300 sm:text-sm">
                 <span className="flex items-center gap-1">
                   <Clock size={14} className="text-lime-400" />
                   {cardItem.duration} min
                 </span>
+
                 <span className="flex items-center gap-1">
                   <Flame size={14} className="text-lime-400" />
                   {cardItem.caloriesBurned} kcal
                 </span>
+
                 <span className="flex items-center gap-1">
-                  <Star size={14} className="text-lime-400 fill-lime-400" />
+                  <Star size={14} className="fill-lime-400 text-lime-400" />
                   {cardItem.rating}
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex shrink-0 items-center gap-2">
             <Link
               href={`/librarydetails/${cardItem.id}`}
-              className="hidden sm:inline-block text-white text-xs sm:text-sm border border-white/20 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 hover:bg-white/5"
+              className="hidden rounded-full border border-white/20 px-3 py-1.5 text-xs text-white hover:bg-white/5 sm:inline-block sm:px-4 sm:py-2 sm:text-sm"
             >
               View Details
             </Link>
+
             <MarkBtn />
             <DltBtn cardItem={cardItem} />
           </div>

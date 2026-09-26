@@ -1,15 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { CardsContext } from "@/context/CardContext";
+import { useContext, useState } from "react";
 import DataOne from "./DataOne";
 import DataTwo from "./DataTwo";
 import StatOne from "./StatOne";
 import StatTwo from "./StatTwo";
 
+type SortType = "Duration" | "Calories" | "Rating";
+
 export default function MyPlan() {
+  const { addToPlan, addToSaved } = useContext(CardsContext);
+
   const [button, setButton] = useState<"Today's plan" | "Saved">(
     "Today's plan",
   );
+
+  const [sortBy, setSortBy] = useState<SortType>("Duration");
+
+  const sortData = (data: typeof addToPlan) => {
+    return [...data].sort((a, b) => {
+      if (sortBy === "Duration") {
+        return b.duration - a.duration;
+      }
+
+      if (sortBy === "Calories") {
+        return b.caloriesBurned - a.caloriesBurned;
+      }
+
+      return b.rating - a.rating;
+    });
+  };
+
+  const sortedPlan = sortData(addToPlan);
+  const sortedSaved = sortData(addToSaved);
 
   return (
     <div className="min-h-screen bg-[#0b0b0f] px-4 py-8 text-white">
@@ -30,7 +54,7 @@ export default function MyPlan() {
           <div className="flex w-full items-center gap-1 rounded-full bg-[#161619] p-1 sm:w-auto">
             <button
               onClick={() => setButton("Today's plan")}
-              className={`flex-1 rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200 sm:flex-none ${
+              className={`flex-1 rounded-full px-4 py-2 text-sm font-medium sm:flex-none ${
                 button === "Today's plan"
                   ? "bg-white text-black"
                   : "text-gray-400 hover:text-white"
@@ -41,7 +65,7 @@ export default function MyPlan() {
 
             <button
               onClick={() => setButton("Saved")}
-              className={`flex-1 rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200 sm:flex-none ${
+              className={`flex-1 rounded-full px-4 py-2 text-sm font-medium sm:flex-none ${
                 button === "Saved"
                   ? "bg-white text-black"
                   : "text-gray-400 hover:text-white"
@@ -51,19 +75,27 @@ export default function MyPlan() {
             </button>
           </div>
 
-          <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-normal">
+          <div className="flex w-full items-center justify-between gap-2 sm:w-auto">
             <span className="text-sm text-gray-400">Sort By</span>
 
-            <select className="select select-sm w-32 rounded-full border border-white/10 bg-[#1c1c22] text-white">
-              <option>Duration</option>
-              <option>Calories</option>
-              <option>Rating</option>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as SortType)}
+              className="select select-sm w-32 rounded-full border border-white/10 bg-[#1c1c22] text-white"
+            >
+              <option value="Duration">Duration</option>
+              <option value="Calories">Calories</option>
+              <option value="Rating">Rating</option>
             </select>
           </div>
         </div>
 
         <div className="mt-4">
-          {button === "Today's plan" ? <DataOne /> : <DataTwo />}
+          {button === "Today's plan" ? (
+            <DataOne data={sortedPlan} />
+          ) : (
+            <DataTwo data={sortedSaved} />
+          )}
         </div>
       </div>
     </div>
