@@ -4,10 +4,6 @@ import Library from "./Library";
 export default async function Libraries() {
   const res = await fetch("https://api.api-store.workers.dev/api/fitlog");
 
-  if (!res.ok) {
-    throw new Error(`Failed to fetch workouts: ${res.status}`);
-  }
-
   const data: iLibraryType[] = await res.json();
 
   return (
