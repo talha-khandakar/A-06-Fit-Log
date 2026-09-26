@@ -1,21 +1,21 @@
-## Project Name
+Project Name:
 
 FitLog
 
-## Short Description
+Short Description:
 
 FitLog is a simple workout website. Here user can see workouts, add workout to plan, save workout and see workout details.
 
-## Technologies Used
+Technologies Used:
 
-1. Next.js
-2. TypeScript
-3. Tailwind CSS
-4. DaisyUI
-5. React Icons / Lucide Icons
-   6.React Toastify
+1 Next.js
+2 React toastify
+3 TypeScript
+4 Tailwind CSS
+5 DaisyUI
+6 React Icons / Lucide Icons
 
-## 5 Key Features
+5 Key Features:
 
 1. User can see different workouts.
 2. User can see workout details.

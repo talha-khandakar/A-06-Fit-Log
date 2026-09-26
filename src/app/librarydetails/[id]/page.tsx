@@ -10,97 +10,100 @@ export default async function LibraryDetailsPage({
 }) {
   const { id } = await params;
 
-  const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
+  const res = await fetch(`https://api.api-store.workers.dev/api/fitlog/${id}`);
+
   const library: iLibraryType = await res.json();
 
   return (
-    <div className="bg-[#0b0c0e] min-h-screen">
+    <div className="min-h-screen bg-[#0b0c0e]">
       <div className="mx-auto max-w-6xl px-6 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div className="w-full h-72 md:h-full relative rounded-xl overflow-hidden">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+          <div className="relative h-72 w-full overflow-hidden rounded-xl md:h-full">
             <Image
               src={library.image}
               alt={library.name}
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
           </div>
 
           <div>
-            <h1 className="text-white text-3xl font-bold uppercase">
+            <h1 className="text-3xl font-bold uppercase text-white">
               {library.name}
             </h1>
 
-            <p className="text-zinc-400 mt-2">{library.description}</p>
+            <p className="mt-2 text-zinc-400">{library.description}</p>
 
-            <div className="flex gap-2 mt-4">
+            <div className="mt-4 flex gap-2">
               {library.muscleGroups.map((group, index) => (
                 <span
                   key={index}
-                  className="bg-lime-400 text-black text-xs font-bold px-2 py-1 rounded-full"
+                  className="rounded-full bg-lime-400 px-2 py-1 text-xs font-bold text-black"
                 >
                   {group}
                 </span>
               ))}
             </div>
 
-            <div className="bg-[#111318] border border-zinc-800 rounded-xl mt-6 divide-y divide-zinc-800">
+            <div className="mt-6 divide-y divide-zinc-800 rounded-xl border border-zinc-800 bg-[#111318]">
               <div className="flex items-center justify-between px-4 py-3">
-                <span className="text-zinc-500 text-xs uppercase">
+                <span className="text-xs uppercase text-zinc-500">
                   Equipment
                 </span>
-                <span className="text-white text-sm">{library.equipment}</span>
+                <span className="text-sm text-white">{library.equipment}</span>
               </div>
 
               <div className="flex items-center justify-between px-4 py-3">
-                <span className="text-zinc-500 text-xs uppercase">
+                <span className="text-xs uppercase text-zinc-500">
                   Difficulty
                 </span>
-                <span className="text-white text-sm">{library.difficulty}</span>
+                <span className="text-sm text-white">{library.difficulty}</span>
               </div>
 
               <div className="flex items-center justify-between px-4 py-3">
-                <span className="text-zinc-500 text-xs uppercase">Sets</span>
-                <span className="text-white text-sm">{library.sets}</span>
+                <span className="text-xs uppercase text-zinc-500">Sets</span>
+                <span className="text-sm text-white">{library.sets}</span>
               </div>
 
               <div className="flex items-center justify-between px-4 py-3">
-                <span className="text-zinc-500 text-xs uppercase">Reps</span>
-                <span className="text-white text-sm">{library.reps}</span>
+                <span className="text-xs uppercase text-zinc-500">Reps</span>
+                <span className="text-sm text-white">{library.reps}</span>
               </div>
 
               <div className="flex items-center justify-between px-4 py-3">
-                <span className="text-zinc-500 text-xs uppercase">
+                <span className="text-xs uppercase text-zinc-500">
                   Duration
                 </span>
-                <span className="text-white text-sm">
+                <span className="text-sm text-white">
                   {library.duration} min
                 </span>
               </div>
 
               <div className="flex items-center justify-between px-4 py-3">
-                <span className="text-zinc-500 text-xs uppercase">
+                <span className="text-xs uppercase text-zinc-500">
                   Calories
                 </span>
-                <span className="text-white text-sm">
+                <span className="text-sm text-white">
                   {library.caloriesBurned} kcal
                 </span>
               </div>
 
               <div className="flex items-center justify-between px-4 py-3">
-                <span className="text-zinc-500 text-xs uppercase">Rating</span>
-                <span className="text-white text-sm">{library.rating}</span>
+                <span className="text-xs uppercase text-zinc-500">Rating</span>
+                <span className="text-sm text-white">{library.rating}</span>
               </div>
             </div>
 
-            <h2 className="text-white font-bold mt-6 mb-3">Instructions</h2>
-            <ol className="text-zinc-300 text-sm space-y-2 list-decimal list-inside">
+            <h2 className="mb-3 mt-6 font-bold text-white">Instructions</h2>
+
+            <ol className="list-inside list-decimal space-y-2 text-sm text-zinc-300">
               {library.instructions.map((step, index) => (
                 <li key={index}>{step}</li>
               ))}
             </ol>
 
-            <div className="flex flex-wrap gap-3 mt-6">
+            <div className="mt-6 flex flex-wrap gap-3">
               <PlanBtn library={library} />
               <SaveBtn library={library} />
             </div>

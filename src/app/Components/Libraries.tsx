@@ -2,8 +2,13 @@ import { iLibraryType } from "@/type";
 import Library from "./Library";
 
 export default async function Libraries() {
-  const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
-  const data = await res.json();
+  const res = await fetch("https://api.api-store.workers.dev/api/fitlog");
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch workouts: ${res.status}`);
+  }
+
+  const data: iLibraryType[] = await res.json();
 
   return (
     <div
@@ -18,7 +23,7 @@ export default async function Libraries() {
         </p>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {data.map((library: iLibraryType) => (
+          {data.map((library) => (
             <Library key={library.id} library={library} />
           ))}
         </div>
